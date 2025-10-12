@@ -1,0 +1,14 @@
+# Telegram bot
+python-telegram-bot
+
+# LaTeX rendering options (choose one or more):
+
+# Pure Python LaTeX to MathML + HTML/CSS rendering
+latex2mathml>=3.75.0
+weasyprint>=60.0
+
+# Matplotlib fallback
+matplotlib>=3.7.0
+
+# Additional useful packages
+Pillow>=10.0.0  # Image processing

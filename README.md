@@ -1,38 +1,64 @@
 ﻿# Telegram Bot for LaTeX Rendering
 
-This is a Telegram bot that renders LaTeX code embedded in text messages and sends the rendered result as an image. It utilizes the Python `matplotlib` library to generate the images from LaTeX code.
+A Telegram bot that renders LaTeX code embedded in text messages and sends the rendered result as an image. It supports two rendering backends:
+
+- WeasyPrint (latex2mathml + weasyprint) — high quality typesetting
+- Matplotlib — reliable fallback
+
+Backend is selected explicitly via the LATEX_BACKEND environment variable.
 
 ## Features
 
-- **/start**: Sends a welcome message and explains the bot's functionality.
-- Detects LaTeX code between `$...$` in text messages.
-- Renders up to 5 LaTeX expressions per message to prevent spamming.
-- Sends the LaTeX-rendered output as an image back to the user.
+- /start: Sends a welcome message and explains the bot's functionality
+- Detects LaTeX code between `$...$` in text messages
+- Renders up to 5 LaTeX expressions per message to prevent spamming
+- Sends the rendered output as a PNG image
 
 ## Requirements
 
-- Python 3.7+
-- `matplotlib` library for rendering LaTeX.
-- `python-telegram-bot` library for interacting with Telegram.
+- Python 3.9+
+- `python-telegram-bot`
+- One of the renderers:
+    - WeasyPrint path: `latex2mathml` + `weasyprint`
+    - Matplotlib path: `matplotlib`
+
+Install from the included `requirements.txt`.
 
 ## Installation
 
-1. Clone the repository:
+```powershell
+# from project root
+python -m venv .venv
+. .\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
 
-2. Install the dependencies:
+## Configuration
 
-3. Set up your bot on Telegram:
+Set your bot token (from BotFather) and choose a backend.
 
-    - Create a bot using [BotFather](https://core.telegram.org/bots#botfather) and get your bot token.
-    - Replace the placeholder `YOUR_TELEGRAM_BOT_TOKEN` in the script with your bot token.
+```powershell
+# Required
+$env:TELEGRAM_TOKEN = "<your_bot_token>"
 
-## Usage
+# Optional: choose renderer backend (weasyprint or matplotlib)
+$env:LATEX_BACKEND = "matplotlib"    # default
+# or
+$env:LATEX_BACKEND = "weasyprint"
+```
 
-1. Run the bot
-2. Add the bot to a chat and send a message containing LaTeX code between `$...$`. For example:
+## Run
 
-    ```
-    Here’s an equation: $E = mc^2$
-    ```
+```powershell
+python .\main.py
+```
 
-3. The bot will send back an image of the rendered LaTeX.
+Then add the bot to a chat and send a message containing LaTeX code between `$...$`, e.g.:
+
+```
+Here’s an equation: $E = mc^2$
+```
+
+## License
+
+MIT
