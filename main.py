@@ -4,11 +4,9 @@ import logging
 from telegram import Update, InputFile
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
 from io import BytesIO
+import os
 
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
+logging.basicConfig(level=logging.WARNING)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -66,7 +64,9 @@ def render_latex_to_image(latex_string):
 
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token('YOUR_TELEGRAM_BOT_TOKEN').build()
+
+    TOKEN = os.getenv("TELEGRAM_TOKEN")
+    application = ApplicationBuilder().token(TOKEN).build()
 
     start_handler = CommandHandler('start', start)
     latex_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), to_latex)
