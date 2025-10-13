@@ -6,6 +6,9 @@ A Telegram bot that renders LaTeX code embedded in text messages and sends the r
 - Matplotlib — reliable fallback
 
 Backend is selected explicitly via the LATEX_BACKEND environment variable.
+## Example
+
+Take a look at [@LatexParser_Bot](https://t.me/LatexParser_Bot) in Telegram!
 
 ## Features
 
