@@ -61,6 +61,30 @@ Then add the bot to a chat and send a message containing LaTeX code between `$..
 ```
 Here’s an equation: $E = mc^2$
 ```
+## Docker
+
+```bash
+# Build and run
+docker compose up --build
+
+# Or standalone
+docker build -t latex-bot .
+docker run --env-file .env latex-bot
+```
+
+Create a `.env` file:
+
+```
+TELEGRAM_TOKEN=your_bot_token
+LATEX_BACKEND=matplotlib
+```
+
+## Tests
+
+```powershell
+pip install -r requirements-dev.txt
+pytest tests/ -v
+```
 
 ## License
 
