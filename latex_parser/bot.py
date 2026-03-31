@@ -44,6 +44,7 @@ class LatexBot:
             await context.bot.send_message(
                 chat_id=update.effective_chat.id,
                 text="Stop spamming or you will be punished.",
+                reply_to_message_id=update.message.message_id,
             )
             return
 
@@ -62,18 +63,21 @@ class LatexBot:
             await context.bot.send_photo(
                 chat_id=update.effective_chat.id,
                 photo=InputFile(image_stream, filename="latex_image.png"),
+                reply_to_message_id=update.message.message_id,
             )
         except LatexRenderError as e:
             logger.error("LaTeX rendering error: %s", e)
             await context.bot.send_message(
                 chat_id=update.effective_chat.id,
                 text=f"Sorry, I couldn't render the LaTeX: ${latex_string}$.",
+                reply_to_message_id=update.message.message_id,
             )
         except Exception as e:
             logger.error("Unexpected error: %s", e)
             await context.bot.send_message(
                 chat_id=update.effective_chat.id,
                 text=f"Sorry, something went wrong while rendering: ${latex_string}$.",
+                reply_to_message_id=update.message.message_id,
             )
 
     # -- Helpers --------------------------------------------------------------
